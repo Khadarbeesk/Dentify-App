@@ -25,10 +25,10 @@ A full-stack MERN application that streamlines the process of discovering dentis
 ## 📄 Pages & UI Preview
 
 ### 🏠 Home Page
-![Home](./screenshots/home.png)
+![Home](./screenshots/Home.png)
 ### 🧑‍⚕️ Doctors Listing
-![Doctors](./screenshots/home2.png)
-![Treatments](./screenshots/home3.png)
+![Doctors](./screenshots/Home2.png)
+![Treatments](./screenshots/Home3.png)
 
 ### 🛠️ Admin Dashboard
 ![Admin](./screenshots/Admin.png)
