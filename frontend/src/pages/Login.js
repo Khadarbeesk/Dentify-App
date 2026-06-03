@@ -102,10 +102,10 @@ export default function Login() {
         <p className="text-center mt-4">
           New user? <Link to="/register" className="text-blue-500">Register</Link>
         </p>
-
-        <p className="text-xs text-gray-400 mt-2 text-center italic">
-          Demo Admin → admin@gmail.com / 1234
-        </p>
+<div className="text-xs text-gray-400 mt-2 text-center italic">
+  <p>Demo Admin → admin@gmail.com / 1234</p>
+  <p>Demo Doctor → priya@gmail.com / 123456</p>
+</div>
 
       </form>
     </div>

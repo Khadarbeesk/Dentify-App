@@ -65,13 +65,13 @@ export default function AdminCharts({ appointments }) {
           Appointment Status
         </h3>
 
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={350}>
           <PieChart>
-           <Pie
+        <Pie
   data={statusData}
   dataKey="value"
-  innerRadius={70}
-  outerRadius={110}
+  innerRadius={60}
+  outerRadius={90}
   label
 >
               <Cell fill="#3B82F6" />

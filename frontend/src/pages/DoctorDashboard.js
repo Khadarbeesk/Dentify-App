@@ -57,7 +57,7 @@ const updateStatus = async (id, status) => {
   }
 };
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-10">
+ <div className="mt-20 p-6 md:p-10 bg-gray-50 min-h-screen">
 
       {/* HEADER */}
       <h1 className="text-3xl font-bold text-gray-800 mb-6">

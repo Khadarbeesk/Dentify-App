@@ -53,11 +53,10 @@ export default function Admin() {
  
 
   return (
-    
-    <div className="p-6 md:p-10 bg-gray-50 min-h-screen">
+<div className="mt-20 p-6 md:p-10 bg-gray-50 min-h-screen">
 
       {/* HEADER */}
-      <div className="mb-8">
+    <div className="mb-8 mt-6">
   <h1 className="text-4xl font-bold text-gray-900">
     📊 Admin Analytics Dashboard
   </h1>
