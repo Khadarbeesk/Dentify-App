@@ -45,13 +45,13 @@ router.post("/", auth, async (req, res) => {
 // ==============================
 router.get("/my", auth, async (req, res) => {
   try {
-    console.log("USER ID:", req.user.id);
+    
 
     const data = await Appointment.find({
       userId: new mongoose.Types.ObjectId(req.user.id)
     });
 
-    console.log("RESULT:", data);
+    
 
     res.json(data);
 

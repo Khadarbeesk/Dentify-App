@@ -1,5 +1,3 @@
-const API =
-  process.env.REACT_APP_API_URL ||
-  "http://localhost:5000";
+const API = "https://dentify-app-60p9.onrender.com";
 
 export default API;

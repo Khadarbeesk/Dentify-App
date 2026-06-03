@@ -31,7 +31,7 @@ export default function Home() {
   );
 
   useEffect(() => {
-    fetch(`${API}/api/appointments/api/dentists`)
+   fetch(`${API}/api/dentists`)
       .then(res => res.json())
       .then(data => {
         setDentists(data);

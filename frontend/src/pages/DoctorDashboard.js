@@ -32,7 +32,7 @@ const updateStatus = async (id, status) => {
   try {
 
     await fetch(
-      `fetch(${API}/api/appointments/doctor/${id}/status`,
+  `${API}/api/appointments/doctor/${id}/status`,
       {
         method: "PUT",
         headers: {
