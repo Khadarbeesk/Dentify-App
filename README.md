@@ -4,52 +4,68 @@
 
 ## 📌 Description
 
-A full-stack MERN application that allows users to browse dentists, book appointments, and view bookings through an admin panel.
+### 🦷 Dentist Appointment Booking Platform
+
+A full-stack MERN application that streamlines the process of discovering dentists and scheduling appointments online. The platform provides dedicated dashboards for Users, Doctors, and Admins, enabling efficient appointment management throughout the entire appointment lifecycle. Users can browse dentists, search by name, and book appointments, while doctors can manage appointment statuses and track patient bookings. The system includes JWT-based authentication, role-based access control, duplicate slot booking prevention, appointment lifecycle management, analytics dashboards, and a responsive user interface built with React and Tailwind CSS. The application is deployed using Vercel and Render, with MongoDB used for secure data storage.
+
 
 ---
 
 ## 🚀 Live Demo
 
-🌐 Frontend: https://dentify-app.netlify.app/
-🔗 Backend: https://dentist-backend-iam4.onrender.com
-💻 GitHub: https://github.com/Khadarbeesk/dentist-app
+🌐 Frontend: https://dentify-app-qlte.vercel.app/
+🔗 Backend:  https://dentify-app-60p9.onrender.com
+💻 GitHub: https://github.com/Khadarbeesk/Dentify-App
 
 ---
 
 ## 📸 Screenshots
 
-### 🏠 Home Page
 
 ## 📄 Pages & UI Preview
 
 ### 🏠 Home Page
 ![Home](./screenshots/home.png)
-
-### 🔐 Login Page
-![Login](./screenshots/login.png)
-
-### 📝 Register Page
-![Register](./screenshots/register.png)
-
 ### 🧑‍⚕️ Doctors Listing
-![Doctors](./screenshots/doctorslisting.png)
-
-### 📅 Booking Page
-![Booking](./screenshots/booking.png)
+![Doctors](./screenshots/home2.png)
+![Treatments](./screenshots/home3.png)
 
 ### 🛠️ Admin Dashboard
-![Admin](./screenshots/admin.png)
+![Admin](./screenshots/Admin.png)
+
+### 🛠️ Doctor Dashboard
+![Doctor](./screenshots/Doctor.png)
+
+
+### 🧑‍⚕️ User Dashboard
+![User](./screenshots/MyDashboard.png)
+
 
 ---
 
 ## 💡 Key Highlights
-
-* Clean and modular MERN architecture
-* JWT-based secure authentication system
-* Role-based access control (User/Admin)
-* Optimized UI using Tailwind CSS
-* Pagination and filtering for better user experience
+💡 Key Highlights
+* Full-Stack MERN Application
+* JWT-Based Authentication
+* Role-Based Access Control (User / Doctor / Admin)
+* Responsive UI with Tailwind CSS
+* Appointment Booking & Management
+* Admin Analytics Dashboard with Charts
+* Doctor Dashboard for Appointment Management
+* Pagination and Search Functionality
+* Deployed on Vercel and Render
 * Fully responsive design (mobile + desktop)
+🕒 Duplicate Slot Booking Prevention
+* Prevents multiple patients from booking the same dentist, date, and time slot.
+🔄 Appointment Lifecycle Management
+* Complete appointment workflow from booking to completion.
+* Appointment statuses include:
+     * Booked
+     * Confirmed
+     * Completed
+     * Cancelled by User
+     * Cancelled by Doctor
+* Status updates are reflected across User, Doctor, and Admin dashboards in real time.
 
 ---
 
@@ -57,24 +73,38 @@ A full-stack MERN application that allows users to browse dentists, book appoint
 
 ### 👤 User Features
 
-* Browse list of dentists
-* View dentist details (photo, name, experience, clinic, location, book appointment button)
-* Book appointments (patient name, age, gender, appointment date, slot - bonus feature)
-* Pagination (bonus feature)
-* Filtering by name (bonus feature)
-* Responsive UI
 
-### 🔐 Authentication
-
-* User registration & login
-* JWT-based authentication
-* Role-based access (User / Admin)
+* Browse dentists
+* Search dentists by name
+* View dentist details
+* Book appointments
+* View personal appointments
+* Responsive design
+* Duplicate Slot Booking Prevention
 
 ### 🛠️ Admin Features
+* Secure Admin Login
+* View all appointments
+* Analytics Dashboard
+* Appointment Status Overview
+* Patient Gender Distribution Charts
 
-* Secure admin login
-* View all appointments (patient name, age, gender, appointment date, dentist name, clinic name, slot)
 
+### 🛠️ Doctor Features
+
+Doctor Login
+*  View assigned appointments
+*  Confirm appointments
+*  Mark appointments as completed
+*  Cancel appointments when necessary
+### 🔐 Authentication
+
+User Registration & Login
+* Doctor Login
+* Admin Login
+* JWT Authentication
+* Protected Routes
+* Role-Based Authorization
 ---
 
 ## 🧰 Tech Stack
@@ -85,6 +115,7 @@ A full-stack MERN application that allows users to browse dentists, book appoint
 * Tailwind CSS
 * React Router DOM
 * Fetch API
+* Recharts
 
 ### Backend
 
@@ -99,25 +130,38 @@ A full-stack MERN application that allows users to browse dentists, book appoint
 * Frontend → Netlify
 * Backend → Render
 
----
-
 ## 📡 API Endpoints
 
-### Auth
+### 🔐 Authentication
 
 POST /api/auth/register
+
 POST /api/auth/login
 
-### Appointments
-
-POST /api/appointments
-GET /api/appointments
-
-### Dentists
+### 🦷 Dentists
 
 GET /api/dentists
 
----
+POST /api/dentists
+
+### 📅 Appointments
+
+POST /api/appointments
+
+GET /api/appointments
+
+GET /api/appointments/my
+
+GET /api/appointments/doctor
+
+GET /api/appointments/slots
+
+PUT /api/appointments/cancel/:id
+
+PUT /api/appointments/doctor/:id/status
+
+
+
 
 
 
@@ -163,6 +207,12 @@ npm start
 Email: [admin@gmail.com](mailto:admin@gmail.com)
 Password: 1234
 
+**Doctor Login**
+Email: [priya@gmail.com](mailto:priya@gmail.com)
+Password: 123456
+
+
+
 ---
 
 ## ⚠️ Important Note
@@ -174,10 +224,13 @@ Users cannot self-register as admin.
 
 ## 🚀 Future Improvements
 
-* Payment integration
-* Email/SMS notifications
-* Appointment cancellation & rescheduling
-* Doctor availability calendar
+* Online Payments
+* Email Notifications
+* SMS Notifications
+* Appointment Rescheduling
+* Doctor Availability Calendar
+* Patient Medical History
+* Video Consultation Support
 
 ---
 
