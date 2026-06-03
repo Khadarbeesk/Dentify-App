@@ -76,15 +76,107 @@ router.get("/doctor", auth, async (req, res) => {
   }
 });
 
-// ==============================
-// 🔥 ADMIN - ALL BOOKINGS (ADD THIS)
-// ==============================
+router.get("/slots", async (req, res) => {
+  try {
+    const { dentistName, date } = req.query;
+
+    const selectedDate = new Date(date);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    const appointments = await Appointment.find({
+      dentistName,
+      date: selectedDate
+    });
+
+    res.json(appointments);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
 router.get("/", auth, admin, async (req, res) => {
   try {
     const data = await Appointment.find().sort({ createdAt: -1 });
     res.json(data);
   } catch (err) {
     res.status(500).json({ msg: "Error fetching all appointments" });
+  }
+});
+router.put("/cancel/:id", auth, async (req, res) => {
+  try {
+    const appointment = await Appointment.findById(req.params.id);
+
+    if (!appointment) {
+      return res.status(404).json({
+        msg: "Appointment not found"
+      });
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const appointmentDate = new Date(appointment.date);
+    appointmentDate.setHours(0, 0, 0, 0);
+
+    if (today >= appointmentDate) {
+      return res.status(400).json({
+        msg: "Cannot cancel on appointment date"
+      });
+    }
+
+    appointment.status = "Cancelled By User";
+
+    await appointment.save();
+
+    res.json({
+      msg: "Appointment Cancelled"
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      msg: "Server Error"
+    });
+  }
+});
+router.put("/doctor/:id/status", auth, async (req, res) => {
+  try {
+
+    if (req.user.role !== "doctor") {
+      return res.status(403).json({
+        msg: "Access Denied"
+      });
+    }
+
+    const appointment = await Appointment.findById(req.params.id);
+
+    if (!appointment) {
+      return res.status(404).json({
+        msg: "Appointment not found"
+      });
+    }
+
+    if (
+      appointment.status === "Cancelled By User" ||
+      appointment.status === "Cancelled By Doctor"
+    ) {
+      return res.status(400).json({
+        msg: "Cancelled appointments cannot be modified"
+      });
+    }
+
+    appointment.status = req.body.status;
+
+    await appointment.save();
+
+    res.json({
+      msg: "Status Updated"
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      msg: "Server Error"
+    });
   }
 });
 

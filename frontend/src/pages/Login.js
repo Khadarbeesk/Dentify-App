@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import API from "../config";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function Login() {
     // ✅ VALIDATION ADDED
     if (!validate()) return;
 
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${API}api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
@@ -44,7 +45,7 @@ export default function Login() {
     if (data.token) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.user.role);
-      console.log("TOKEN SAVED:", data.token);
+     
 
       alert("Login successful");
 

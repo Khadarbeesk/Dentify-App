@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminCharts from "../components/AdminCharts";
+import API from "../config";
 
 
 export default function Admin() {
@@ -18,13 +20,13 @@ export default function Admin() {
       return;
     }
 
-    fetch("http://localhost:5000/api/appointments", {
+    fetch(`${API}/api/appointments`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
       }
     })
       .then(res => {
-        console.log("Status:", res.status); // 🔍 debug
+        // 🔍 debug
 
         if (!res.ok) {
           throw new Error("Failed to fetch appointments");
@@ -33,7 +35,7 @@ export default function Admin() {
         return res.json();
       })
       .then(data => {
-        console.log("Appointments:", data); // 🔍 debug
+       // 🔍 debug
         setAppointments(data);
         setLoading(false);
       })
@@ -53,33 +55,85 @@ export default function Admin() {
   ).length;
 
   return (
+    
     <div className="p-6 md:p-10 bg-gray-50 min-h-screen">
 
       {/* HEADER */}
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">
-        Admin Dashboard
-      </h2>
+      <div className="mb-8">
+  <h1 className="text-4xl font-bold text-gray-900">
+    📊 Admin Analytics Dashboard
+  </h1>
+
+  <p className="text-gray-500 mt-2">
+    Monitor appointments, patient trends and clinic performance.
+  </p>
+</div>
 
       {/* STATS CARDS */}
-      {!loading && (
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-5 rounded-xl shadow-md">
-            <p className="text-gray-500">Total Appointments</p>
-            <h2 className="text-2xl font-bold text-blue-600">{total}</h2>
-          </div>
+{!loading && (
+  <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-8">
 
-          <div className="bg-white p-5 rounded-xl shadow-md">
-            <p className="text-gray-500">Female Patients</p>
-            <h2 className="text-2xl font-bold text-pink-500">{females}</h2>
-          </div>
+    <div className="bg-white rounded-2xl shadow-lg p-6 border border-blue-100">
+      <p className="text-gray-500 text-sm">
+        Total Appointments
+      </p>
+      <h2 className="text-4xl font-bold text-blue-600 mt-2">
+        {total}
+      </h2>
+    </div>
 
-          <div className="bg-white p-5 rounded-xl shadow-md">
-            <p className="text-gray-500">Male Patients</p>
-            <h2 className="text-2xl font-bold text-indigo-500">{males}</h2>
-          </div>
-        </div>
-      )}
+    <div className="bg-white rounded-2xl shadow-lg p-6 border border-green-100">
+      <p className="text-gray-500 text-sm">
+        Confirmed
+      </p>
+      <h2 className="text-4xl font-bold text-green-600 mt-2">
+        {
+          appointments.filter(
+            a => a.status === "Confirmed"
+          ).length
+        }
+      </h2>
+    </div>
 
+    <div className="bg-white rounded-2xl shadow-lg p-6 border border-purple-100">
+      <p className="text-gray-500 text-sm">
+        Completed
+      </p>
+      <h2 className="text-4xl font-bold text-purple-600 mt-2">
+        {
+          appointments.filter(
+            a => a.status === "Completed"
+          ).length
+        }
+      </h2>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 border border-red-100">
+      <p className="text-gray-500 text-sm">
+        Cancelled
+      </p>
+      <h2 className="text-4xl font-bold text-red-600 mt-2">
+        {
+          appointments.filter(
+            a =>
+              a.status === "Cancelled By User" ||
+              a.status === "Cancelled By Doctor"
+          ).length
+        }
+      </h2>
+    </div>
+
+    <div className="bg-white rounded-2xl shadow-lg p-6 border border-pink-100">
+      <p className="text-gray-500 text-sm">
+        Female Patients
+      </p>
+      <h2 className="text-4xl font-bold text-pink-600 mt-2">
+        {females}
+      </h2>
+    </div>
+
+  </div>
+)}
       {/* LOADING */}
       {loading && (
         <div className="flex justify-center mt-10">
@@ -113,7 +167,8 @@ export default function Admin() {
                   <th className="p-3">Date</th>
                   <th className="p-3">Time</th>
                   <th className="p-3">Dentist</th>
-                  <th className="p-3">Clinic</th>
+                 <th className="p-3">Clinic</th>
+<th className="p-3">Status</th>
                 </tr>
               </thead>
 
@@ -153,6 +208,21 @@ export default function Admin() {
 
                     <td className="p-3">{a.dentistName}</td>
                     <td className="p-3">{a.clinicName}</td>
+<td className="p-3">
+  <span
+    className={`px-3 py-1 rounded-full text-sm font-medium ${
+      a.status === "Booked"
+        ? "bg-blue-100 text-blue-600"
+        : a.status === "Confirmed"
+        ? "bg-green-100 text-green-600"
+        : a.status === "Completed"
+        ? "bg-purple-100 text-purple-600"
+        : "bg-red-100 text-red-600"
+    }`}
+  >
+    {a.status || "Booked"}
+  </span>
+</td>
 
                   </tr>
                 ))}

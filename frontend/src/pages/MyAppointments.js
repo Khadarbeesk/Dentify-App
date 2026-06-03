@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import API from "../config";
 
 export default function MyAppointments() {
 
@@ -10,26 +11,26 @@ export default function MyAppointments() {
   useEffect(() => {
   const token = localStorage.getItem("token");
 
-  console.log("TOKEN:", token); // 🔥 debug
+ // 🔥 debug
 
   // ❌ if no token → stop API call
   if (!token || token === "null" || token === "undefined") {
-    console.log("No token found");
+   
     setLoading(false);
     return;
   }
 
-  fetch("http://localhost:5000/api/appointments/my", {
+  fetch(`${API}/api/appointments/my`, {
     headers: {
       Authorization: `Bearer ${token}` // ✅ correct format
     }
   })
     .then(res => {
-      console.log("STATUS:", res.status); // 🔥 debug
+       // 🔥 debug
       return res.json();
     })
     .then(data => {
-      console.log("MY BOOKINGS:", data);
+   
       setAppointments(data);
       setLoading(false);
     })
@@ -42,6 +43,41 @@ export default function MyAppointments() {
   if (role !== "user") {
     return <Navigate to="/" />;
   }
+ const cancelAppointment = async (id) => {
+  try {
+
+    const res = await fetch(
+      `${API}/api/appointments/cancel/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization:
+            "Bearer " + localStorage.getItem("token")
+        }
+      }
+    );
+
+    const data = await res.json();
+
+    alert(data.msg);
+
+    if (res.ok) {
+      setAppointments(prev =>
+        prev.map(a =>
+          a._id === id
+            ? {
+                ...a,
+                status: "Cancelled By User"
+              }
+            : a
+        )
+      );
+    }
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   return (
     <div className="p-6 min-h-screen bg-gray-50">
@@ -68,6 +104,8 @@ export default function MyAppointments() {
                 <th className="p-3">Date</th>
                 <th className="p-3">Time</th>
                 <th className="p-3">Clinic</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Action</th>
               </tr>
             </thead>
 
@@ -79,7 +117,35 @@ export default function MyAppointments() {
                     {new Date(a.date).toLocaleDateString()}
                   </td>
                   <td className="p-3">{a.time}</td>
-                  <td className="p-3">{a.clinicName}</td>
+                 <td className="p-3">{a.clinicName}</td>
+
+<td className="p-3">
+  <span
+  className={`px-3 py-1 rounded-full text-sm font-medium ${
+    a.status === "Booked"
+      ? "bg-blue-100 text-blue-600"
+      : a.status === "Confirmed"
+      ? "bg-green-100 text-green-600"
+      : a.status === "Completed"
+      ? "bg-purple-100 text-purple-600"
+      : "bg-red-100 text-red-600"
+  }`}
+>
+  {a.status}
+</span>
+</td>
+<td className="p-3">
+ {a.status === "Booked" ? (
+  <button
+    onClick={() => cancelAppointment(a._id)}
+    className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600"
+  >
+    Cancel
+  </button>
+) : (
+  "-"
+)}
+</td>
                 </tr>
               ))}
             </tbody>

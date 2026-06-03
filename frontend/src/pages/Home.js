@@ -4,8 +4,9 @@ import BookingModal from "../components/BookingModal";
 import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import HealthCarousel from "../components/HealthCarousel";
-import DentalCategories from "../components/DentalCategories";
 import ExperienceSection from "../components/ExperienceSection";
+
+import WhyChooseUs from "../components/WhyChooseUs";
 
 
 export default function Home() {
@@ -117,9 +118,12 @@ export default function Home() {
           close={() => setSelected(null)}
         />
       )}
-<HealthCarousel />
-<DentalCategories /> 
+<div id="treatments">
+  <HealthCarousel />
+</div>
+
 <ExperienceSection />
+<WhyChooseUs/>
       
       <Footer />
     </div>

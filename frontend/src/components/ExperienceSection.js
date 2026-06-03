@@ -1,135 +1,183 @@
 import { motion } from "framer-motion";
-import { FaTooth, FaCalendarCheck, FaUserMd, FaCheckCircle } from "react-icons/fa";
+import {
+  FaSearch,
+  FaCalendarCheck,
+  FaCreditCard,
+  FaUserMd,
+  FaCheckCircle
+} from "react-icons/fa";
 
 export default function ExperienceSection() {
+  const steps = [
+    {
+      icon: <FaSearch />,
+      title: "Find a Dentist",
+      desc: "Browse verified dentists based on experience, clinic and location."
+    },
+    {
+      icon: <FaCalendarCheck />,
+      title: "Choose a Slot",
+      desc: "Select your preferred date and appointment time."
+    },
+    {
+      icon: <FaCreditCard />,
+      title: "Secure Payment",
+      desc: "Pay safely using Razorpay and receive instant confirmation."
+    },
+    {
+      icon: <FaUserMd />,
+      title: "Get Treatment",
+      desc: "Visit the clinic and receive professional dental care."
+    }
+  ];
+
   return (
-    <div className="bg-gradient-to-b from-[#f8fafc] via-white to-[#eef2ff] py-24 px-6 md:px-20">
+    <section className="bg-gradient-to-b from-white to-blue-50 py-24 px-6 md:px-20">
 
-      {/* ================= HOW IT WORKS ================= */}
-      <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-14">
-        How <span className="text-blue-600">Dentify</span> Works
-      </h2>
+      {/* HOW IT WORKS */}
+      <div className="text-center mb-16">
+        <span className="bg-blue-100 text-blue-600 px-4 py-2 rounded-full font-medium">
+          Simple Process
+        </span>
 
-      <div className="grid md:grid-cols-3 gap-8 mb-24">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-5">
+          How Dentify Works
+        </h2>
 
-        {[
-          {
-            icon: <FaTooth />,
-            title: "Find a Dentist",
-            desc: "Browse verified dentists based on location, experience, and reviews."
-          },
-          {
-            icon: <FaCalendarCheck />,
-            title: "Book Instantly",
-            desc: "Select your preferred slot and confirm appointment in seconds."
-          },
-          {
-            icon: <FaUserMd />,
-            title: "Visit & Get Care",
-            desc: "Meet your dentist and receive professional treatment."
-          }
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.2 }}
-            className="group bg-white/60 backdrop-blur-xl border border-white/40 rounded-2xl p-8 shadow-md hover:shadow-2xl transition"
-          >
-            <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xl mb-5 group-hover:scale-110 transition">
-              {item.icon}
-            </div>
-
-            <h3 className="text-lg font-semibold text-gray-900">
-              {item.title}
-            </h3>
-
-            <p className="text-gray-500 mt-2 text-sm leading-relaxed">
-              {item.desc}
-            </p>
-          </motion.div>
-        ))}
+        <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+          Book your dental appointment in just a few simple steps.
+        </p>
       </div>
 
-      {/* ================= BENEFITS ================= */}
-      <h2 className="text-4xl font-extrabold text-gray-900 mb-12">
-        Why Choose Dentify
-      </h2>
+      <div className="grid md:grid-cols-4 gap-8 mb-28">
 
-      <div className="grid md:grid-cols-3 gap-6 mb-24">
-
-        {[
-          "Instant booking with real-time slots",
-          "Trusted & verified dentists",
-          "Seamless and fast experience",
-          "Secure and private data handling",
-          "No waiting, no hassle",
-          "Modern and easy-to-use interface"
-        ].map((text, i) => (
+        {steps.map((step, index) => (
           <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="flex items-start gap-4 p-5 rounded-xl bg-white shadow-sm hover:shadow-lg transition"
-          >
-            <FaCheckCircle className="text-green-500 mt-1" />
-            <p className="text-gray-700 text-sm">{text}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* ================= TESTIMONIALS ================= */}
-      <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-12">
-        What Our Users Say
-      </h2>
-
-      <div className="grid md:grid-cols-3 gap-8">
-
-        {[
-          {
-            name: "Rahul Sharma",
-            role: "Software Engineer",
-            text: "I booked a dentist in under 2 minutes. The process was smooth and hassle-free."
-          },
-          {
-            name: "Sneha Reddy",
-            role: "Student",
-            text: "Loved the clean interface. Finding doctors and booking was super easy."
-          },
-          {
-            name: "Arjun Verma",
-            role: "Business Owner",
-            text: "No waiting at clinics anymore. Just book and go. Highly convenient!"
-          }
-        ].map((user, i) => (
-          <motion.div
-            key={i}
+            key={index}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.2 }}
-            className="relative bg-white/70 backdrop-blur-xl border border-white/40 p-6 rounded-2xl shadow-md hover:shadow-2xl transition"
+            transition={{ delay: index * 0.15 }}
+            className="relative text-center"
           >
-            <p className="text-gray-600 text-sm leading-relaxed mb-4">
-              “{user.text}”
+
+            <div className="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-center text-2xl shadow-xl">
+              {step.icon}
+            </div>
+
+            <div className="absolute top-10 left-full w-full hidden md:block">
+              {index !== 3 && (
+                <div className="h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+              )}
+            </div>
+
+            <h3 className="font-bold text-xl mt-6 text-gray-900">
+              {step.title}
+            </h3>
+
+            <p className="text-gray-500 mt-3">
+              {step.desc}
             </p>
 
-            <div>
-              <h4 className="font-semibold text-gray-900">
-                {user.name}
-              </h4>
-              <p className="text-xs text-gray-500">
-                {user.role}
-              </p>
-            </div>
           </motion.div>
         ))}
 
       </div>
 
-    </div>
+      {/* TRUST SECTION */}
+
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+          <img
+          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200"
+            alt="Dental Care"
+            className="rounded-[32px] shadow-2xl w-full"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
+
+          <span className="bg-green-100 text-green-600 px-4 py-2 rounded-full font-medium">
+            Trusted By Patients
+          </span>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-6">
+            Trusted Dental Care Across India
+          </h2>
+
+          <p className="text-gray-500 mt-5 text-lg">
+            Dentify connects patients with experienced dentists and makes appointment booking fast, secure and hassle-free.
+          </p>
+
+          <div className="mt-8 space-y-4">
+
+            {[
+              "Verified and experienced dentists",
+              "Real-time appointment booking",
+              "Secure online payments",
+              "Fast and user-friendly platform"
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <FaCheckCircle className="text-green-500" />
+                <span>{item}</span>
+              </div>
+            ))}
+
+          </div>
+
+          <div className="grid grid-cols-2 gap-6 mt-10">
+
+            <div className="bg-white p-6 rounded-3xl shadow-lg">
+              <h3 className="text-4xl font-bold text-blue-600">
+                500+
+              </h3>
+              <p className="text-gray-500">
+                Appointments Booked
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-3xl shadow-lg">
+              <h3 className="text-4xl font-bold text-indigo-600">
+                50+
+              </h3>
+              <p className="text-gray-500">
+                Verified Dentists
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-3xl shadow-lg">
+              <h3 className="text-4xl font-bold text-purple-600">
+                4.9★
+              </h3>
+              <p className="text-gray-500">
+                Patient Rating
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-3xl shadow-lg">
+              <h3 className="text-4xl font-bold text-green-600">
+                100%
+              </h3>
+              <p className="text-gray-500">
+                Secure Payments
+              </p>
+            </div>
+
+          </div>
+
+        </motion.div>
+
+      </div>
+
+    </section>
   );
 }

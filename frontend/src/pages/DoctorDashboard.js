@@ -27,7 +27,34 @@ export default function DoctorDashboard() {
   if (role !== "doctor") {
     return <Navigate to="/" />;
   }
+const updateStatus = async (id, status) => {
+  try {
 
+    await fetch(
+      `http://localhost:5000/api/appointments/doctor/${id}/status`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization:
+            "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ status })
+      }
+    );
+
+    setAppointments(prev =>
+      prev.map(a =>
+        a._id === id
+          ? { ...a, status }
+          : a
+      )
+    );
+
+  } catch (err) {
+    console.log(err);
+  }
+};
   return (
     <div className="min-h-screen bg-gray-50 p-6 md:p-10">
 
@@ -75,6 +102,7 @@ export default function DoctorDashboard() {
                   <th className="p-3">Date</th>
                   <th className="p-3">Time</th>
                   <th className="p-3">Clinic</th>
+                  <th className="p-3">Status</th>
                 </tr>
               </thead>
 
@@ -107,6 +135,32 @@ export default function DoctorDashboard() {
                     </td>
 
                     <td className="p-3">{a.clinicName}</td>
+              <td className="p-3">
+  {a.status === "Cancelled By User" ? (
+    <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full">
+      Cancelled By User
+    </span>
+  ) : a.status === "Cancelled By Doctor" ? (
+    <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full">
+      Cancelled By Doctor
+    </span>
+  ) : (
+    <select
+      value={a.status}
+      onChange={(e) =>
+        updateStatus(a._id, e.target.value)
+      }
+      className="border rounded-lg px-2 py-1"
+    >
+      <option value="Booked">Booked</option>
+      <option value="Confirmed">Confirmed</option>
+      <option value="Completed">Completed</option>
+      <option value="Cancelled By Doctor">
+        Cancelled By Doctor
+      </option>
+    </select>
+  )}
+</td>
 
                   </tr>
                 ))}

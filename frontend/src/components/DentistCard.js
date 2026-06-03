@@ -1,8 +1,12 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import {
+  FaMapMarkerAlt,
+  FaStar,
+  FaCheckCircle
+} from "react-icons/fa";
 
 export default function DentistCard({ dentist, onBook }) {
-
   const navigate = useNavigate();
 
   const handleBooking = () => {
@@ -17,76 +21,112 @@ export default function DentistCard({ dentist, onBook }) {
     onBook(dentist);
   };
 
+  const expertise = [
+    "Root Canal",
+    "Whitening",
+    "Cleaning",
+    "Smile Design"
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -10, scale: 1.03 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-      className="group relative bg-white/70 backdrop-blur-xl border border-white/40 rounded-2xl shadow-md hover:shadow-2xl overflow-hidden transition-all duration-300"
+      whileHover={{
+        y: -10,
+        scale: 1.02
+      }}
+      transition={{ duration: 0.4 }}
+      className="group bg-white rounded-[32px] overflow-hidden shadow-lg hover:shadow-2xl border border-blue-100"
     >
+      {/* IMAGE */}
 
-      {/* ✨ Glow effect */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-blue-400/10 to-indigo-400/10 blur-xl" />
-
-      {/* 🔥 IMAGE (Hero-style animation) */}
       <div className="relative overflow-hidden">
-        <motion.img
+
+        <img
           src={dentist.image}
-          initial={{ opacity: 0, y: -40, scale: 1.08 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          whileHover={{ scale: 1.05 }}
-          className="h-52 w-full object-cover"
+          alt={dentist.name}
+          className="h-72 w-full object-cover group-hover:scale-110 transition duration-700"
         />
 
-        {/* overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
-      </div>
-
-      <div className="p-5 relative z-10">
-
-        {/* 🟢 Availability */}
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
-          <span className="text-xs text-green-600 font-medium">
-            Available
-          </span>
-        </div>
-
-        {/* NAME */}
-        <h2 className="text-xl font-semibold text-gray-900">
-          {dentist.name}
-        </h2>
-
-        {/* QUALIFICATION */}
-        <p className="text-gray-500 text-sm">
-          {dentist.qualification}
-        </p>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
         {/* EXPERIENCE */}
-        <p className="text-sm mt-1 text-gray-600">
-          {dentist.experience} yrs experience
-        </p>
+
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-lg px-4 py-2 rounded-2xl shadow-lg">
+          <p className="text-xs text-gray-500">
+            Experience
+          </p>
+
+          <h3 className="font-bold text-blue-600">
+            {dentist.experience}+ Years
+          </h3>
+        </div>
 
         {/* CLINIC */}
-        <p className="text-sm text-gray-500">
-          {dentist.clinicName}
-        </p>
 
-        {/* 🔘 BUTTON */}
+        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-lg px-4 py-2 rounded-full text-sm font-medium">
+          {dentist.clinicName}
+        </div>
+
+      </div>
+
+      {/* CONTENT */}
+
+      <div className="p-6">
+
+        <div className="flex justify-between items-start">
+
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              {dentist.name}
+            </h2>
+
+            <p className="text-blue-600 font-medium mt-1">
+              {dentist.qualification}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-full">
+            <FaStar className="text-yellow-500" />
+            <span className="font-semibold">
+              4.9
+            </span>
+          </div>
+
+        </div>
+
+        {/* LOCATION */}
+
+        <div className="flex items-center gap-2 mt-4 text-gray-500">
+          <FaMapMarkerAlt />
+          <span>{dentist.location}</span>
+        </div>
+
+        {/* EXPERTISE TAGS */}
+
+        <div className="flex flex-wrap gap-2 mt-5">
+
+          {expertise.map((item, index) => (
+            <div
+              key={index}
+              className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm flex items-center gap-1"
+            >
+              <FaCheckCircle className="text-xs" />
+              {item}
+            </div>
+          ))}
+
+        </div>
+
+        {/* CTA */}
+
         <button
           onClick={handleBooking}
-          className="relative w-full mt-5 py-2.5 rounded-xl font-medium text-white overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300"
+          className="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-2xl font-semibold shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all"
         >
-          {/* shimmer */}
-          <span className="absolute inset-0 bg-white/20 translate-x-[-100%] hover:translate-x-[100%] transition duration-700"></span>
-
-          <span className="relative z-10">
-            Book Appointment →
-          </span>
+          Book Appointment →
         </button>
 
       </div>
