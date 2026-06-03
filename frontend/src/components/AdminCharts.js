@@ -10,7 +10,7 @@ import {
   YAxis,
   CartesianGrid
 } from "recharts";
-import { Legend } from "recharts";
+
 export default function AdminCharts({ appointments }) {
 
   const statusData = [
