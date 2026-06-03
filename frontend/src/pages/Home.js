@@ -7,6 +7,7 @@ import HealthCarousel from "../components/HealthCarousel";
 import ExperienceSection from "../components/ExperienceSection";
 
 import WhyChooseUs from "../components/WhyChooseUs";
+import API from "../config";
 
 
 export default function Home() {
@@ -30,7 +31,7 @@ export default function Home() {
   );
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/dentists")
+    fetch(`${API}/api/appointments/api/dentists`)
       .then(res => res.json())
       .then(data => {
         setDentists(data);

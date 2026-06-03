@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import API from "../config";
 
 export default function DoctorDashboard() {
 
@@ -8,7 +9,7 @@ export default function DoctorDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/appointments/doctor", {
+    fetch(`${API}/api/appointments/doctor`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
       }
@@ -31,7 +32,7 @@ const updateStatus = async (id, status) => {
   try {
 
     await fetch(
-      `http://localhost:5000/api/appointments/doctor/${id}/status`,
+      `fetch(${API}/api/appointments/doctor/${id}/status`,
       {
         method: "PUT",
         headers: {

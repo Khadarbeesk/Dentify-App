@@ -1,4 +1,5 @@
 import { useState } from "react";
+import API from "../config";
 
 export default function BookingModal({ dentist, close }) {
   const [form, setForm] = useState({
@@ -53,7 +54,7 @@ export default function BookingModal({ dentist, close }) {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/api/appointments",
+        `${API}/api/appointments`,
         {
           method: "POST",
           headers: {

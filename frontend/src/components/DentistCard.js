@@ -6,6 +6,7 @@ import {
   FaCheckCircle
 } from "react-icons/fa";
 
+
 export default function DentistCard({ dentist, onBook }) {
   const navigate = useNavigate();
 

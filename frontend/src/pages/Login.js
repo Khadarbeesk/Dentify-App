@@ -34,7 +34,7 @@ export default function Login() {
     // ✅ VALIDATION ADDED
     if (!validate()) return;
 
-    const res = await fetch(`${API}api/auth/login`, {
+    const res = await fetch(`${API}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
