@@ -31,7 +31,7 @@ export default function DoctorDashboard() {
 const updateStatus = async (id, status) => {
   try {
 
-    await fetch(
+  await fetch(
   `${API}/api/appointments/doctor/${id}/status`,
       {
         method: "PUT",
