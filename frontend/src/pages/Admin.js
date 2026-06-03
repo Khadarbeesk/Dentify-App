@@ -50,9 +50,7 @@ export default function Admin() {
   const females = appointments.filter(
     a => a.gender?.toLowerCase() === "female"
   ).length;
-  const males = appointments.filter(
-    a => a.gender?.toLowerCase() === "male"
-  ).length;
+ 
 
   return (
     
@@ -149,7 +147,13 @@ export default function Admin() {
       )}
 
       {/* TABLE */}
-      {!loading && appointments.length > 0 && (
+      {/* CHARTS */}
+{!loading && appointments.length > 0 && (
+  <AdminCharts appointments={appointments} />
+)}
+
+{/* TABLE */}
+{!loading && appointments.length > 0 && (
         <div className="bg-white shadow-xl rounded-xl overflow-hidden">
 
           <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 font-semibold">
